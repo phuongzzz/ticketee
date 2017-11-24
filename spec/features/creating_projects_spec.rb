@@ -1,10 +1,14 @@
 require "rails_helper"
 
 RSpec.feature "Users can create projects" do
-  scenario "with valid attributes" do
+
+  before do
     visit "/"
 
     click_link "New Project"
+  end
+
+  scenario "with valid attributes" do
     fill_in "Name", with: "Sublime Text 3"
     fill_in "Description", with: "One of the best text editor."
     click_button "Create Project"
@@ -16,5 +20,12 @@ RSpec.feature "Users can create projects" do
 
     title = "Sublime Text 3 - Projects - Ticketee"
     expect(page).to have_title title
+  end
+
+  scenario "when providing invalid attributes" do
+    click_button "Create Project"
+
+    expect(page).to have_content "Your project has not been created."
+    expect(page).to have_content "Name can't be blank"
   end
 end
