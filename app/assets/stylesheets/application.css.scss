@@ -1,12 +1,12 @@
 
- @import "bootstrap-sprockets";
- @import "bootstrap";
- @import "font-awesome";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome";
 
- @import "projects";
- @import "responsive";
+@import "projects";
+@import "responsive";
 
- .page-header {
+.page-header {
   position: relative;
   padding-bottom: 0px;
   &:first-child {
@@ -74,4 +74,21 @@ form {
 
 body {
   padding-top: 70px;
+}
+
+#attributes {
+  @extend .table;
+  @extend .table-condensed;
+  width: 65%;
+  th {
+    width: 35%;
+  }
+  tr:first-child {
+    td, th {
+      border-top: 0px;
+    }
+  }
+  td, th {
+    line-height: 24px !important;
+  }
 }
