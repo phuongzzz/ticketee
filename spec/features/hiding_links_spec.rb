@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.feature "Users can only see the appropriate links" do
+  let(:project) { FactoryGirl.create :project }
   let(:user) { FactoryGirl.create :user }
   let(:admin) { FactoryGirl.create :user, :admin }
 
@@ -8,6 +9,11 @@ RSpec.feature "Users can only see the appropriate links" do
     scenario "can not see New Project links" do
       visit "/"
       expect(page).not_to have_link "New Project"
+    end
+
+    scenario "can not see Delete Project links" do
+      visit project_path project
+      expect(page).not_to have_link "Delete Project"
     end
   end
 
@@ -18,6 +24,11 @@ RSpec.feature "Users can only see the appropriate links" do
       visit "/"
       expect(page).not_to have_link "New Project"
     end
+
+    scenario "can not see Delete Project links" do
+      visit project_path project
+      expect(page).not_to have_link "Delete Project"
+    end
   end
 
   context "Admin users" do
@@ -26,6 +37,11 @@ RSpec.feature "Users can only see the appropriate links" do
     scenario "can see the New Project link" do
       visit "/"
       expect(page).to have_link "New Project"
+    end
+
+    scenario "can see Delete Project links" do
+      visit project_path project
+      expect(page).to have_link "Delete Project"
     end
   end
 end
