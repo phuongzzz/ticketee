@@ -5,4 +5,8 @@ Rails.application.routes.draw do
   resources :projects do
     resources :tickets
   end
+
+  namespace :admin do
+    root "application#index"
+  end
 end
