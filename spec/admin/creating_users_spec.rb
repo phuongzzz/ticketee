@@ -17,4 +17,14 @@ RSpec.feature "Admin can create new user" do
     click_button "Create User"
     expect(page).to have_content "User has been created."
   end
+
+  scenario "when the new user is an admin" do
+    fill_in "Email", with: "myadmin@ticketee.com"
+    fill_in "Password", with: "phuongphuong"
+    check "Is an admin?"
+    click_button "Create User"
+
+    expect(page).to have_content "User has been created."
+    expect(page).to have_content "myadmin@ticketee.com (Admin)"
+  end
 end
